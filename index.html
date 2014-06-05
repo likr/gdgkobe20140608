@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="guestbook">
   <head>
     <meta charset="utf-8">
     <title>Guestbook</title>
@@ -8,7 +8,7 @@
   <body>
     <div class="container">
       <h1>Guestbook</h1>
-      <div>
+      <div ng-controller="MainController">
         <div>
           <h2>Post Greeting</h2>
           <form>
@@ -29,9 +29,9 @@
           <h2>Greetings</h2>
           <div>
             <span>
-              <b>おのうえ</b> wrote:
+              <b>{{greetings[0].author}}</b> wrote:
             </span>
-            <blockquote>こんにちは</blockquote>
+            <blockquote>{{greetings[0].content}}</blockquote>
           </div>
           <div>
             <span>
@@ -54,5 +54,7 @@
         </div>
       </div>
     </div>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="guestbook.js"></script>
   </body>
 </html>
