@@ -11,14 +11,14 @@
       <div ng-controller="MainController">
         <div>
           <h2>Post Greeting</h2>
-          <form>
+          <form ng-submit="submit()">
             <div class="form-group">
               <label>Name</label>
-              <input class="form-control">
+              <input class="form-control" ng-model="newGreeting.author">
             </div>
             <div class="form-group">
               <label>Message</label>
-              <textarea class="form-control" rows="3"></textarea>
+              <textarea class="form-control" rows="3" ng-model="newGreeting.content"></textarea>
             </div>
             <div class="form-group">
               <input type="submit" class="btn btn-default" value="Submit">

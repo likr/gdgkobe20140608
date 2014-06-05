@@ -7,4 +7,11 @@ app.controller('MainController', function($scope) {
     {author: 'いまい', content: 'Python最高！'},
     {content: 'こんにちは'}
   ];
+
+  $scope.newGreeting = {};
+
+  $scope.submit = function() {
+    $scope.greetings.unshift($scope.newGreeting);
+    $scope.newGreeting = {};
+  };
 });
