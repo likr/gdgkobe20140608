@@ -1,20 +1,58 @@
-<!doctype html>
-<html ng-app="guestbook">
-<head>
-<meta charset="utf-8">
-<title>Guestbook</title>
-<link rel="stylesheet" href="guestbook.css">
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-  <h1>Guestbook</h1>
-  <div ng-view/>
-</div>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap.min.js"></script>
-<script src="guestbook.js"></script>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Guestbook</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Guestbook</h1>
+      <div>
+        <div>
+          <h2>Post Greeting</h2>
+          <form>
+            <div class="form-group">
+              <label>Name</label>
+              <input class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="Submit">
+            </div>
+          </form>
+        </div>
+        <div>
+          <h2>Greetings</h2>
+          <div>
+            <span>
+              <b>おのうえ</b> wrote:
+            </span>
+            <blockquote>こんにちは</blockquote>
+          </div>
+          <div>
+            <span>
+              <b>おのうえ</b> wrote:
+            </span>
+            <blockquote>はろー</blockquote>
+          </div>
+          <div>
+            <span>
+              <b>いまい</b> wrote:
+            </span>
+            <blockquote>Python最高！</blockquote>
+          </div>
+          <div>
+            <span>
+              An anonymous person wrote:
+            </span>
+            <blockquote>こんにちは</blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
