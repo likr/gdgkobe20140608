@@ -27,29 +27,14 @@
         </div>
         <div>
           <h2>Greetings</h2>
-          <div>
-            <span>
-              <b>{{greetings[0].author}}</b> wrote:
+          <div ng-repeat="greeting in greetings">
+            <span ng-if="greeting.author">
+              <b>{{greeting.author}}</b> wrote:
             </span>
-            <blockquote>{{greetings[0].content}}</blockquote>
-          </div>
-          <div>
-            <span>
-              <b>おのうえ</b> wrote:
-            </span>
-            <blockquote>はろー</blockquote>
-          </div>
-          <div>
-            <span>
-              <b>いまい</b> wrote:
-            </span>
-            <blockquote>Python最高！</blockquote>
-          </div>
-          <div>
-            <span>
+            <span ng-if="!greeting.author">
               An anonymous person wrote:
             </span>
-            <blockquote>こんにちは</blockquote>
+            <blockquote>{{greeting.content}}</blockquote>
           </div>
         </div>
       </div>
