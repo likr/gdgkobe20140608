@@ -11,14 +11,15 @@
       <div ng-controller="MainController">
         <div>
           <h2>Post Greeting</h2>
-          <form ng-submit="submit()">
+          <form ng-submit="submit()" name="form">
             <div class="form-group">
               <label>Name</label>
               <input class="form-control" ng-model="newGreeting.author">
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': form.content.$invalid && form.content.$dirty}">
               <label>Message</label>
-              <textarea class="form-control" rows="3" ng-model="newGreeting.content"></textarea>
+              <textarea class="form-control" rows="3" ng-model="newGreeting.content" name="content" required></textarea>
+              <p class="help-block" ng-show="form.content.$invalid && form.content.$dirty">Required</p>
             </div>
             <div class="form-group">
               <input type="submit" class="btn btn-default" value="Submit">

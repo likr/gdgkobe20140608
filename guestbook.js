@@ -13,5 +13,6 @@ app.controller('MainController', function($scope) {
   $scope.submit = function() {
     $scope.greetings.unshift($scope.newGreeting);
     $scope.newGreeting = {};
+    $scope.form.$setPristine(true);
   };
 });
