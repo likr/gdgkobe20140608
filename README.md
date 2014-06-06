@@ -360,6 +360,7 @@ ngRouteも、ngResourceと同様に本体とは別に提供されているので
     <div class="container">
       <h1>Guestbook</h1>
       <div ng-view></div>
+    </div>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
