@@ -1,18 +1,19 @@
-var app = angular.module('guestbook', []);
+var app = angular.module('guestbook', ['ngResource']);
 
-app.controller('MainController', function($scope) {
-  $scope.greetings = [
-    {author: 'おのうえ', content: 'こんにちは'},
-    {author: 'おのうえ', content: 'はろー'},
-    {author: 'いまい', content: 'Python最高！'},
-    {content: 'こんにちは'}
-  ];
+app.factory('Greeting', function($resource) {
+  return $resource('http://gdgkobe-ng-guestbook.appspot.com/greetings');
+});
 
-  $scope.newGreeting = {};
+app.controller('MainController', function($scope, Greeting) {
+  $scope.greetings = Greeting.query();
+
+  $scope.newGreeting = new Greeting();
 
   $scope.submit = function() {
-    $scope.greetings.unshift($scope.newGreeting);
-    $scope.newGreeting = {};
-    $scope.form.$setPristine(true);
+    $scope.newGreeting.$save(function(greeting) {
+      $scope.greetings.unshift(greeting);
+      $scope.newGreeting = new Greeting();
+      $scope.form.$setPristine(true);
+    });
   };
 });
