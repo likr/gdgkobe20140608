@@ -46,7 +46,8 @@ open /Applications/Google\ Chrome.app --args --allow-file-access-from-files
 
 必要なファイル一式は https://github.com/likr/gdgkobe20140608/releases/tag/step1 からダウンロードできます。
 
-```html:index.html
+**index.html**
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -115,7 +116,8 @@ Guestbookアプリが扱うデータは来訪者が書き込んだ挨拶(Greetin
 
 ModuleとControllerを作成します。`$scope.greetings`にはあなたの好きなテストデータを設定してみてください。挨拶は匿名で書き込むことができるようにしますので、`author`は省略できます。
 
-```js:guestbook.js
+**guestbook.js**
+```javascript
 var app = angular.module('guestbook', []);
 
 app.controller('MainController', function($scope) {
