@@ -131,18 +131,21 @@ app.controller('MainController', function($scope) {
 ```
 
 ### Scriptの読み込み
-```html:index.html
+**index.html**
+```html
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="guestbook.js"></script>
 ```
 
 ### ngApp
-```html:index.html
+**index.html**
+```html
 <html ng-app="guestbook">
 ```
 
 ### ngController
-```html:index.html
+**index.html**
+```html
   <body>
     <div class="container">
       <h1>Guestbook</h1>
@@ -152,7 +155,8 @@ app.controller('MainController', function($scope) {
 ### 受け取った値の表示
 `{{}}`の中では、`$scope`にセットされた値を参照することができます。
 
-```html:index.html
+**index.html**
+```html
           <div>
             <span>
               <b>{{greetings[0].author}}</b> wrote:
@@ -165,7 +169,8 @@ app.controller('MainController', function($scope) {
 `{{greetings[0].author}}`のように、一件ずつViewを書くのはめんどうですし、greetingsのサイズが変わった時にも対応しなければ行けません。AngularJSのViewではループを使うことができます。また、匿名の来訪者の場合には表示を変える必要があります。AngularJSのViewでは条件分岐を使うこともできます。
 
 ### ngRepeat
-```html:index.html
+**index.html**
+```html
           <div ng-repeat="greeting in greetings">
             <span>
               <b>{{greeting.author}}</b> wrote:
@@ -175,7 +180,8 @@ app.controller('MainController', function($scope) {
 ```
 
 ### ngIf
-```html:index.html
+**index.html**
+```html
       <span ng-if="greeting.author">
         <b>{{greeting.author}}</b> wrote:
       </span>
@@ -192,7 +198,8 @@ app.controller('MainController', function($scope) {
 ## Step2.1 Greetingを追加する
 
 ### Submit処理
-```js:guestbook.js
+**guestbook.js**
+```javascript
 app.controller('MainController', function($scope) {
   $scope.greetings = [
     {author: 'おのうえ', content: 'こんにちは'},
@@ -211,12 +218,14 @@ app.controller('MainController', function($scope) {
 ```
 
 ### ngSubmit
-```html:guestbook.js
+**index.html**
+```html
           <form ng-submit="submit()">
 ```
 
 ### ngModel
-```html:index.html
+**index.html**
+```html
           <div class="form-group">
               <label>Name</label>
               <input class="form-control" ng-model="newGreeting.author">
@@ -230,7 +239,8 @@ app.controller('MainController', function($scope) {
 ## Step2.2 FormのValidation
 
 ### contentを必須に
-```html:index.html
+**index.html**
+```html
           <form ng-submit="submit()" name="form">
             <div class="form-group">
               <label>Name</label>
@@ -246,7 +256,8 @@ app.controller('MainController', function($scope) {
 ### SubmitされたらFormの状態を初期化する
 上の状態だと、Submitした瞬間フォームがクリアされて、contentが必須だというエラーが出ると思います。`$setPristine`でフォームの状態をリセットしましょう。
 
-```js:guestbook.js
+**guestbook.js**
+```javascript
   $scope.submit = function() {
     $scope.greetings.unshift($scope.newGreeting);
     $scope.newGreeting = {};
@@ -267,24 +278,28 @@ APIサーバーのURLは http://gdgkobe-ng-guestbook.appspot.com/greetings で�
 ### scriptタグの追加
 ngResouceはAngularJS本体とは別jsファイルで提供されているので、scriptタグを追加する必要があります。
 
-```html:index.html
+**index.html**
+```html
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
 ```
 
 ### 依存モジュールの指定
-```js:guestbook.js
+**guestbook.js**
+```javascript
 var app = angular.module('guestbook', ['ngResource']);
 ```
 
 ### Greetingモデルの作成
-```js:guestbook.js
+**guestbook.js**
+```javascript
 app.factory('Greeting', function($resource) {
   return $resource('http://gdgkobe-ng-guestbook.appspot.com/greetings');
 });
 ```
 
 ### コントローラーへの依存性注入
-```js:guestbook.js
+**guestbook.js**
+```javascript
 app.controller('MainController', function($scope, Greeting) {
 ```
 
@@ -292,17 +307,20 @@ app.controller('MainController', function($scope, Greeting) {
 ## Step3.2 サーバーとのデータ送受
 
 ### Greetingモデルによるデータ取得
-```js:guestbook.js
+**guestbook.js**
+```javascript
   $scope.greetings = Greeting.query();
 ```
 
 ### Greetingインスタンスの作成
-```js:guestbook.js
+**guestbook.js**
+```javascript
   $scope.newGreeting = new Greeting();
 ```
 
 ### Greetingインスタンスの保存
-```js:guestbook.js
+**guestbook.js**
+```javascript
   $scope.submit = function() {
     $scope.newGreeting.$save(function(greeting) {
       $scope.greetings.unshift(greeting);
@@ -321,14 +339,16 @@ AngularJSのアプリで複数ビューの対応をするにはngRouteが便利�
 ### ngRouteの読み込み
 ngRouteも、ngResourceと同様に本体とは別に提供されているのでscriptタグで読み込みをします。
 
-```html:index.html
+**index.html**
+```html
     <script src="bower_components/angular-route/angular-route.min.js"></script>
 ```
 
 ### ビューの分割
 アプリのメイン部分を`index.html`から`partials/main.html`に切り出します。
 
-```html:index.html
+**index.html**
+```html
 <!DOCTYPE html>
 <html ng-app="guestbook">
   <head>
@@ -348,7 +368,8 @@ ngRouteも、ngResourceと同様に本体とは別に提供されているので
 </html>
 ```
 
-```html:partials/main.html
+**partials/main.html**
+```html
 <div>
   <div>
     <h2>Post Greeting</h2>
@@ -383,12 +404,14 @@ ngRouteも、ngResourceと同様に本体とは別に提供されているので
 ```
 
 ### 依存モジュールの指定
-```js:guestbook.js
+**guestbook.js**
+```javascript
 var app = angular.module('guestbook', ['ngResource', 'ngRoute']);
 ```
 
 ### ルーティングの設定
-```js:guestbook.js
+**guestbook.js**
+```javascript
 app.config(function($routeProvider) {
   $routeProvider
     .when('/greetings', {
@@ -402,7 +425,8 @@ app.config(function($routeProvider) {
 ## Step4.2 ビューの分割と遷移
 
 ### トップページの追加
-```html:partials/top.html
+**partials/top.html**
+```html
 <div>
   <p>Welcome</p>
   <a href="#/greetings">Show Greetings</a>
@@ -412,7 +436,8 @@ app.config(function($routeProvider) {
 ### トップページのルーティング
 トップページへのルートを加えて、デフォルトのルートをトップページにします。
 
-```js:guestbook.js
+**guestbook.js**
+```javascript
   $routeProvider
     .when('/', {
       templateUrl: 'partials/top.html'
@@ -425,7 +450,8 @@ app.config(function($routeProvider) {
 ```
 
 ### トップへのリンク
-```html:partials/main.html
+**partials/main.html**
+```html
   <div>
     <a href="#/">Back</a>
   </div>
@@ -434,7 +460,8 @@ app.config(function($routeProvider) {
 ### resolve
 今は、コントローラーで非同期処理をしているので、メインのビューが一度表示されてから遅れて挨拶が表示されていると思います。ngRouteを使えば、非同期処理による依存性が全て解決されてからコントローラーの処理に入ることができます。
 
-```js:guestbook.js
+**guestbook.js**
+```javascript
     .when('/greetings', {
       controller: 'MainController',
       templateUrl: 'partials/main.html',
@@ -446,7 +473,8 @@ app.config(function($routeProvider) {
     })
 ```
 
-```js:guestbook.js
+**guestbook.js**
+```javascript
 app.controller('MainController', function($scope, Greeting, greetings) {
   $scope.greetings = greetings;
 ```
